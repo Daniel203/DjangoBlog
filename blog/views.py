@@ -6,9 +6,9 @@ from django.core.paginator import Paginator
 
 def blog_index(request):
     posts = Post.objects.all().order_by('-created_on')
-    paginator = Paginator(posts, 6)
+    paginator = Paginator(posts, 6)  # number posts for page 
     page = request.GET.get('page')
-    posts = paginator.get_page(page)
+    posts = paginator.get_page(page)  # page where post is 
     context = {
         'posts' : posts,
         'blog' : 'active',
@@ -27,7 +27,7 @@ def blog_category(request, category):
 
 
 def blog_detail(request, title):
-    post = get_object_or_404(Post, title=title)
+    post = get_object_or_404(Post, title=title)  # if post doesn't exist return error404
     comments = Comment.objects.filter(post=post)
     form = CommentForm()
     if request.method == 'POST':
@@ -38,8 +38,9 @@ def blog_detail(request, title):
                 body = form.cleaned_data['body'],
                 post = post,
             )
+            print('/' + str(title) + ' ------------------------------------- ')
             comment.save()
-            return HttpResponseRedirect('/blog/' + str(title))
+            return HttpResponseRedirect('/' + str(title))  # when a comment is sent, user is redirect to the same page but with empyt form 
 
     context = {
         'post' : post,

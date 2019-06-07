@@ -23,7 +23,7 @@
 </div>
 <div class="comments col-md-8 offset-md-2">
     <h3>Leave a comment:</h3>
-    <form action="/blog/{{ post.title }}/" method="post">
+    <form action="/{{ post.title }}/" method="post">
         {% csrf_token %}
         <div class="form-group">
             {{ form.author }}
