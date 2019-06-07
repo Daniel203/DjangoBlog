@@ -1,0 +1,17 @@
+body {
+    font-family: 'Karla', sans-serif;
+}
+
+h1 {
+    color: orange;
+    font-size: 55px;
+    text-align: center;
+}
+
+.a_titlePost {
+    font-size: 25px;
+}
+
+.p_anteprimaPost {
+    font-size: 18px;
+}
