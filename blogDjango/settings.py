@@ -124,6 +124,7 @@ STATIC_URL = '/DjangoBlog/blogDjango/static/'
 STATICFILES_DIRS = [
     '/DjangoBlog/blogDjango/static/',
     '/DjangoBlog/blog/static/'
+    '/DjangoBlog/projects/static/'
 ]
 
 

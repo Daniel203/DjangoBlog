@@ -8,7 +8,7 @@
 
 {% block page_content %}
 <div class="col-md-8 offset-md-2">
-    <h1><b>BLOG INDEX</b></h1>
+    <h1>BLOG INDEX</h1>
     {% for post in posts %}
     <h2><a class="a_titlePost" href="{% url 'blog_detail' post.title %}">{{ post.title }}</a></h2>
     <small>
@@ -23,5 +23,34 @@
     <p class="p_anteprimaPost">{{ post.body | slice:":400" }}...</p>
     <hr>
     {% endfor %}
+    
+    <div class="pagination d-flex justify-content-center">
+        {% if posts.has_previous %}
+            <a class="pagination-action" href="?page=1">
+                <i class="fas fa-angle-double-left"></i>
+            </a>
+            <a class="pagination-action" href="?page={{ posts.previous_page_number }}">
+                <i class="fas fa-angle-left"></i>
+            </a>
+        {% endif %}
+
+        {% for num in posts.paginator.page_range %}
+            {% if posts.number == num %}
+                <span class="pagination-number pagination-current">{{ num }}</span>
+            {% elif num > posts.number|add:'-3' and num < posts.number|add:'3' %}
+                <a class="pagination-number" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if posts.has_next %}
+            <a class="pagination-action" href="?page={{ posts.next_page_number }}">
+                    <i class="fas fa-angle-right"></i>
+            </a>
+            <a class="pagination-action" href="?page={{ posts.paginator.num_pages }}">
+                    <i class="fas fa-angle-double-right"></i>
+            </a>
+        {% endif %}
+        
+    </div>
 </div>
 {% endblock %}

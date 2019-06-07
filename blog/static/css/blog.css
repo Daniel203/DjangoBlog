@@ -1,17 +1,45 @@
-body {
-    font-family: 'Karla', sans-serif;
-}
-
-h1 {
-    color: orange;
-    font-size: 55px;
-    text-align: center;
-}
-
 .a_titlePost {
     font-size: 25px;
 }
 
 .p_anteprimaPost {
     font-size: 18px;
+}
+
+
+/* Pagination : numeri che indicano il numero della pagina */
+.pagination {
+    margin: 30px;
+    align-items: center;
+}
+
+.pagination-action:hover {
+    color: orange;
+}
+
+.pagination-action {
+    margin: 0 5px;
+    display: inline-block;
+    padding: 2px;
+    color: rgb(255, 211, 129);
+    font-size: 30px;
+}
+
+.pagination-number {
+    background-color: rgb(255, 211, 129);
+    padding: 1% 1.5% 1% 1.5%;
+    color: white;
+    border-radius: 5px;
+    margin: 0 10px 0 10px;
+}
+
+.pagination-number:hover, .pagination-current {
+    background-color: orange;
+    color: white;
+}
+
+
+/* Comments section */
+.comments-full-width {
+    background-color: rgb(238, 238, 238);
 }

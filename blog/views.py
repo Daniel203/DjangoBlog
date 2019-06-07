@@ -1,12 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from blog.models import Post, Comment
 from blog.forms import CommentForm
-from django.http import Http404
 from django.http import HttpResponseRedirect
-
+from django.core.paginator import Paginator
 
 def blog_index(request):
     posts = Post.objects.all().order_by('-created_on')
+    paginator = Paginator(posts, 6)
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
     context = {
         'posts' : posts,
         'blog' : 'active',
@@ -46,5 +48,4 @@ def blog_detail(request, title):
         'blog' : 'active',
     }
     return render(request, 'blog_detail.html', context)
-
 

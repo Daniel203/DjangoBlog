@@ -6,7 +6,7 @@ class Category(models.Model):
     name = models.CharField(max_length = 20)
     
     def __str__(self):
-        return 'Category {}'.format(self.name)
+        return self.name
         
     class Meta:
         verbose_name_plural = "categories"
@@ -21,7 +21,7 @@ class Post(models.Model):
     #slug = slugify(title)
 
     def __str__(self):
-        return 'Post {}'.format(self.title)
+        return self.title
 
     @property
     def short_description(self):
@@ -44,7 +44,6 @@ class Comment(models.Model):
     def short_description(self):
         return truncatechars(self.body, 100)
 
-    
     class Meta:
         verbose_name_plural = "comments"
         indexes = [
