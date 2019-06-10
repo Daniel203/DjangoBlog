@@ -13,5 +13,6 @@ def project_detail(request, pk):
     project = Project.objects.get(pk=pk)
     context = {
         'project' : project,
+        'project_index' : 'active',
     }
     return render(request, 'project_detail.html', context)

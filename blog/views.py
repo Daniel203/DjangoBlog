@@ -29,6 +29,8 @@ def blog_category(request, category):
 def blog_detail(request, title):
     post = get_object_or_404(Post, title=title)  # if post doesn't exist return error404
     comments = Comment.objects.filter(post=post)
+
+    # comment form
     form = CommentForm()
     if request.method == 'POST':
         form = CommentForm(request.POST)

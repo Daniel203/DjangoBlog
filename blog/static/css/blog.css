@@ -1,9 +1,33 @@
 .a_titlePost {
-    font-size: 25px;
+    font-size: 23px;
+}
+
+.a_titlePost:hover {
+    text-decoration: none;
+    color: rgb(255, 195, 85);
+}
+
+.a_titlePost, .post-title {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.post-title {
+    color: black;
+    font-size: 30px;
 }
 
 .p_anteprimaPost {
     font-size: 18px;
+}
+
+.blogdetail-body {
+    font-size: 17px;
+}
+
+/* Spaziatura verticale */
+.blogindex-posts,
+.blogdetail-body {
+    padding-top: 30px;
 }
 
 
@@ -33,7 +57,8 @@
     margin: 0 10px 0 10px;
 }
 
-.pagination-number:hover, .pagination-current {
+.pagination-number:hover,
+.pagination-current {
     background-color: orange;
     color: white;
 }

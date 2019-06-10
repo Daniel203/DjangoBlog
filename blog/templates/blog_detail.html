@@ -2,14 +2,13 @@
 {% load static %}
 
 {% block page_meta %}
-<title>{{post.title }}</title>
+<title>{{ post.title }}</title>
 <link rel="stylesheet" href="{% static 'css/blog.css' %}">
 {% endblock %}
 
 {% block page_content %}
 <div class="col-md-8 offset-md-2">
-    <h1>{{ post.title }}</h1>
-    <p>{{ post.body | linebreaks }}</p>
+    <h2 class="post-title"><b>{{ post.title }}</b></h2>
     <small>
         {{ post.created_on.date }} |&nbsp;
         Categoria:&nbsp;
@@ -19,6 +18,9 @@
         </a>&nbsp;
         {% endfor %}
     </small>
+    <div class="blogdetail-body">
+        <p>{{ post.body | linebreaks }}</p>
+    </div>
     <br><br><br><br>
 </div>
 <div class="comments col-md-8 offset-md-2">

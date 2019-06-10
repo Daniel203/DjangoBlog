@@ -19,10 +19,11 @@ class Post(models.Model):
     last_modified = models.DateTimeField(auto_now = True)
     categories = models.ManyToManyField('Category', related_name = 'posts')
     #slug = slugify(title)
-
+   
     def __str__(self):
         return self.title
 
+    # short description in admin page
     @property
     def short_description(self):
         return truncatechars(self.body, 100)
