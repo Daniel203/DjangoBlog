@@ -14,11 +14,11 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length = 255)
+    slug = models.SlugField(unique=True)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add = True)
     last_modified = models.DateTimeField(auto_now = True)
     categories = models.ManyToManyField('Category', related_name = 'posts')
-    #slug = slugify(title)
    
     def __str__(self):
         return self.title

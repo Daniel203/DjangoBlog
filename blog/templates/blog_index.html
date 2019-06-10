@@ -11,7 +11,7 @@
     <h1>BLOG INDEX</h1>
     <div class="blogindex-posts">
         {% for post in posts %}
-        <h2><a class="a_titlePost " href="{% url 'blog_detail' post.title %}"><b>{{ post.title }}</b></a></h2>
+        <h2><a class="a_titlePost " href="{% url 'blog_detail' post.slug %}"><b>{{ post.title }}</b></a></h2>
         <small>
             {{ post.created_on.date }} |&nbsp;
             Categoria:&nbsp;

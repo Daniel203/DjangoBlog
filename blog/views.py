@@ -26,8 +26,8 @@ def blog_category(request, category):
     return render(request, 'blog_category.html', context)
 
 
-def blog_detail(request, title):
-    post = get_object_or_404(Post, title=title)  # if post doesn't exist return error404
+def blog_detail(request, slug):
+    post = get_object_or_404(Post, slug=slug)  # if post doesn't exist return error404
     comments = Comment.objects.filter(post=post)
 
     # comment form
@@ -40,9 +40,8 @@ def blog_detail(request, title):
                 body = form.cleaned_data['body'],
                 post = post,
             )
-            print('/' + str(title) + ' ------------------------------------- ')
             comment.save()
-            return HttpResponseRedirect('/' + str(title))  # when a comment is sent, user is redirect to the same page but with empyt form 
+            return HttpResponseRedirect('/' + slug)  # when a comment is sent, user is redirect to the same page but with empyt form 
 
     context = {
         'post' : post,
