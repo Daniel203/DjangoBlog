@@ -2,133 +2,181 @@
 <html lang="it">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <!-- Bootstrap 4 -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <!-- Import fonts from google -->
-  <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <!-- Import fonts from google -->
+    <link href="https://fonts.googleapis.com/css?family=Karla&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
-  {% block page_meta %}
-  {% endblock %}
+    {% block page_meta %}
+    {% endblock %}
 </head>
 
 <body>
 
-  <style>
-    body {
-      font-family: 'Karla', sans-serif;
-    }
+    <style>
+        body {
+            font-family: 'Karla', sans-serif;
+        }
 
-    h1 {
-      color: orange;
-      font-size: 55px;
-      text-align: center;
-      font-weight: bold;
-    }
+        h1 {
+            color: orange;
+            font-size: 55px;
+            text-align: center;
+            font-weight: bold;
+        }
 
-    .navbar {
-      background-color: rgb(255, 195, 85);
-      padding-top: 1%;
-      padding-bottom: 1%;
-      font-family:  'Open Sans', arial, sans-serif;
-    }
+        .navbar {
+            background-color: rgb(255, 195, 85);
+            padding-top: 1%;
+            padding-bottom: 1%;
+            font-family: 'Open Sans', arial, sans-serif;
+        }
 
-    .navbar-dark .navbar-nav .nav-link {
-      font-size: 16px;
-      text-decoration: none;
-      color: white;
-      letter-spacing: 2px;
-      font-weight: bold;
-      position: relative;
-    }
+        .navbar-dark .navbar-nav .nav-link {
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            letter-spacing: 2px;
+            font-weight: bold;
+            position: relative;
+        }
 
-    /* Underline effect in navbar */
-    a:after {
-      background: none repeat scroll 0 0 transparent;
-      bottom: 0;
-      content: "";
-      display: block;
-      height: 3px;
-      left: 50%;
-      position: absolute;
-      background: #fff;
-      transition: width 0.3s ease 0s, left 0.3s ease 0s;
-      width: 0;
-    }
+        /* Underline effect in navbar */
+        .home:after,
+        .projects:after {
+            background: none repeat scroll 0 0 transparent;
+            bottom: 0;
+            content: "";
+            display: block;
+            height: 3px;
+            left: 50%;
+            position: absolute;
+            background: #fff;
+            transition: width 0.3s ease 0s, left 0.3s ease 0s;
+            width: 0;
+        }
 
-    a:hover:after {
-      width: 100%;
-      left: 0;
-    }
-
-
-    .nav-item {
-      margin-right: 10%;
-    }
-
-    .page-content {
-      padding-top: 3%;
-    }
+        .home:hover:after,
+        .projects:hover:after {
+            width: 100%;
+            left: 0;
+        }
 
 
-    /* button hover */
-    .btn-warning:hover,
-    .btn-warning:focus,
-    .btn-warning:active,
-    .btn-warning.active,
-    .open .dropdown-toggle.btn-warning {
-      background-color: rgb(241, 158, 3);
-      color: white;
-      border-color: rgb(241, 158, 3);
-    }
+        .nav-item {
+            margin-right: 10%;
+        }
 
-    .btn-warning,
-    .btn {
-      color: white;
-    }
-  </style>
+        .page-content {
+            padding-top: 3%;
+        }
 
-  <nav class="navbar sticky-top navbar-expand-lg navbar-dark ">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item  blog">
-            <a class="nav-link home" href="{% url 'blog_index' %}">HOME</a>
-          </li>
-          <li class="nav-item projects">
-            <a class="nav-link projects" href="{% url 'project_index' %}">PROJECTS</a>
-          </li>
-        </ul>
-      </div>
+        /* button hover */
+        .btn-warning:hover,
+        .btn-warning:focus,
+        .btn-warning:active,
+        .btn-warning.active,
+        .open .dropdown-toggle.btn-warning {
+            background-color: rgb(241, 158, 3);
+            color: white;
+            border-color: rgb(241, 158, 3);
+        }
+
+        .btn-warning,
+        .btn {
+            color: white;
+        }
+
+        /* Dropdown */
+        .dropdown {
+            color: white;
+        }
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        
+        /* Register / Login  forms */
+        form .alert ul li {
+            list-style: none;
+        }
+
+        form .alert ul {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark ">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item  blog">
+                        <a class="nav-link home" href="{% url 'blog_index' %}">HOME</a>
+                    </li>
+                    <li class="nav-item project">
+                        <a class="nav-link projects" href="{% url 'project_index' %}">PROJECTS</a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav">
+                    <!-- Login Logout SignIn -->
+                    {% if user.is_authenticated %}
+                    <!-- se un utente è loggato mostra logout-->
+                    <!-- Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            {{ user.username }}&#x25BC
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="{% url 'password_change' %}">Cambia Password</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item logout" href="{% url 'logout' %}">Esci</a>
+                        </div>
+                        {% else %}
+                        <!-- altrimenti mostra opzione per registrarsi o loggare-->
+                    <li class="nav-item SignUp">
+                        <a class="nav-link singup " href="{% url 'signup' %}">Registrati</a>
+                    </li>
+                    <li class="nav-item Login">
+                        <a class="nav-link login" href="{% url 'login' %}">Accedi</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid page-content">
+        {% block page_content %}{% endblock %}
     </div>
-  </nav>
 
-  <div class="container-fluid page-content">
-    {% block page_content %}{% endblock %}
-  </div>
-
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-  </script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-  </script>
-  <script src="https://kit.fontawesome.com/6cce1b4403.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script src="https://kit.fontawesome.com/6cce1b4403.js"></script>
 
 </body>
 

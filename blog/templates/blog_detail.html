@@ -19,7 +19,7 @@
         {% endfor %}
     </small>
     <div class="blogdetail-body">
-        <p>{{ post.body | linebreaks }}</p>
+        <p>{{ post.body | safe | linebreaks }}</p>
     </div>
     <br><br><br><br>
 </div>

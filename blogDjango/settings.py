@@ -37,9 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'projects',
     'blog',
+    'users',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -56,7 +60,12 @@ ROOT_URLCONF = 'blogDjango.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['blogDjango/templates/'],
+        'DIRS': [
+            'blogDjango/templates/',
+            'blog/templates',
+            'users/templates',
+            'projects/templates',
+         ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,7 +134,11 @@ STATICFILES_DIRS = [
     '/blogDjango/static/',
     '/blog/static/'
     '/projects/static/'
+    '/users/static/'
 ]
 
+LOGIN_REDIRECT_URL = '/'
 
+LOGOUT_REDIRECT_URL = '/'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

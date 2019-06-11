@@ -21,7 +21,7 @@
             </a>&nbsp;
             {% endfor %}
         </small>
-        <p class="p_anteprimaPost">{{ post.body | slice:":400" }}...</p>
+        <p class="p_anteprimaPost">{{ post.body | safe | slice:":400" }}...</p>
         <hr>
         {% endfor %}
     </div>
