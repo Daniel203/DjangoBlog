@@ -1,7 +1,6 @@
 *.pyc
 __pycache__ 
 myenv
-/static
 .DS.Store
 .vscode
 TODO.txt

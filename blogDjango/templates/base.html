@@ -22,7 +22,9 @@
 <body>
 
     <style>
-        body {
+        body,
+        html {
+            height: 100%;
             font-family: 'Karla', sans-serif;
         }
 
@@ -34,13 +36,14 @@
         }
 
         .navbar {
-            background-color: rgb(255, 195, 85);
+            background-color: #F86F41;
             padding-top: 1%;
             padding-bottom: 1%;
             font-family: 'Open Sans', arial, sans-serif;
         }
 
-        .navbar-dark .navbar-nav .nav-link {
+        .navbar-dark .navbar-nav .nav-link,
+        .navbar-brand {
             font-size: 16px;
             text-decoration: none;
             color: white;
@@ -50,8 +53,7 @@
         }
 
         /* Underline effect in navbar */
-        .home:after,
-        .projects:after {
+        .home:after {
             background: none repeat scroll 0 0 transparent;
             bottom: 0;
             content: "";
@@ -64,8 +66,7 @@
             width: 0;
         }
 
-        .home:hover:after,
-        .projects:hover:after {
+        .home:hover:after {
             width: 100%;
             left: 0;
         }
@@ -74,11 +75,6 @@
         .nav-item {
             margin-right: 10%;
         }
-
-        .page-content {
-            padding-top: 3%;
-        }
-
 
         /* button hover */
         .btn-warning:hover,
@@ -105,7 +101,7 @@
             display: none;
         }
 
-        
+
         /* Register / Login  forms */
         form .alert ul li {
             list-style: none;
@@ -117,7 +113,8 @@
         }
     </style>
 
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+
         <div class="container">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -128,9 +125,6 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item  blog">
                         <a class="nav-link home" href="{% url 'blog_index' %}">HOME</a>
-                    </li>
-                    <li class="nav-item project">
-                        <a class="nav-link projects" href="{% url 'project_index' %}">PROJECTS</a>
                     </li>
                 </ul>
 
@@ -157,13 +151,12 @@
                         <a class="nav-link login" href="{% url 'login' %}">Accedi</a>
                     </li>
                     {% endif %}
-
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container-fluid page-content">
+    <div class="page-content">
         {% block page_content %}{% endblock %}
     </div>
 

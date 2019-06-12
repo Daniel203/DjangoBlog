@@ -7,24 +7,31 @@
 {% endblock %}
 
 {% block page_content %}
-<div class="col-md-8 offset-md-2">
-    <h1>BLOG INDEX</h1>
-    <div class="blogindex-posts">
-        {% for post in posts %}
-        <h2><a class="a_titlePost " href="{% url 'blog_detail' post.slug %}"><b>{{ post.title }}</b></a></h2>
-        <small>
-            {{ post.created_on.date }} |&nbsp;
-            Categoria:&nbsp;
-            {% for category in post.categories.all %}
-            <a href="{% url 'blog_category' category.name %}">
-                {{ category.name }}
-            </a>&nbsp;
-            {% endfor %}
-        </small>
-        <p class="p_anteprimaPost">{{ post.body | safe | slice:":400" }}...</p>
-        <hr>
-        {% endfor %}
+<div class="content">
+    <img class="image_orange" src="/media/images/orange_image.png" alt="" srcset="">
+    {% for post in posts %}
+    <div class="col-md-4">
+        <div class="card rounded">
+            <img class="card-img-top rounded" src="media/{{ post.image }}" alt="title_image">
+            <div class="card-body rounded">
+                <h2 class="card-title"><a class="a_titlePost "
+                        href="{% url 'blog_detail' post.slug %}"><b>{{ post.title }}</b></a>
+                </h2>
+                <small>
+                    {{ post.created_on.date }} |&nbsp;
+                    Categoria:&nbsp;
+                    {% for category in post.categories.all %}
+                    <a href="{% url 'blog_category' category.name %}">
+                        {{ category.name }}
+                    </a>&nbsp;
+                    {% endfor %}
+                </small>
+                <!-- <p class="p_anteprimaPost">{{ post.body | safe | slice:":400" }}...</p> -->
+            </div>
+        </div>
+        <br>
     </div>
+    {% endfor %}
 
     <div class="pagination d-flex justify-content-center">
         {% if posts.has_previous %}
@@ -55,4 +62,8 @@
 
     </div>
 </div>
+
+
+
 {% endblock %}
+
