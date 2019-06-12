@@ -35,25 +35,45 @@
             font-weight: bold;
         }
 
+
+        /* Navbar */
         .navbar {
-            background-color: #F86F41;
+            background-color: rgb(255, 205, 111);
             padding-top: 1%;
             padding-bottom: 1%;
             font-family: 'Open Sans', arial, sans-serif;
         }
 
-        .navbar-dark .navbar-nav .nav-link,
+        .navbar-light .navbar-nav .nav-link,
         .navbar-brand {
             font-size: 16px;
             text-decoration: none;
-            color: white;
+            color: black;
             letter-spacing: 2px;
-            font-weight: bold;
             position: relative;
         }
 
+
+        /* Navbar on mobile phones */
+        @media (max-width: 768px) {
+            .navbar-nav>li>a {
+                padding-top: 10%;
+                padding-bottom: 10%;
+            }
+
+            .navbar-light .navbar-nav .nav-link,
+            .navbar-brand {
+                font-size: 20px;
+            }
+        }
+
+        .navbar-light .navbar-toggler{
+            border: none;
+        }
+
+
         /* Underline effect in navbar */
-        .home:after {
+        .underline-effect:after {
             background: none repeat scroll 0 0 transparent;
             bottom: 0;
             content: "";
@@ -61,20 +81,16 @@
             height: 3px;
             left: 50%;
             position: absolute;
-            background: #fff;
+            background: black;
             transition: width 0.3s ease 0s, left 0.3s ease 0s;
             width: 0;
         }
 
-        .home:hover:after {
+        .underline-effect:hover:after {
             width: 100%;
             left: 0;
         }
 
-
-        .nav-item {
-            margin-right: 10%;
-        }
 
         /* button hover */
         .btn-warning:hover,
@@ -92,13 +108,14 @@
             color: white;
         }
 
+
         /* Dropdown */
-        .dropdown {
-            color: white;
+        .dropdown-menu {
+            background-color: rgb(227, 238, 243);
         }
 
-        .dropdown-toggle::after {
-            display: none;
+        .dropdown-toggle {
+            border: none;
         }
 
 
@@ -111,51 +128,67 @@
             padding: 0;
             margin: 0;
         }
+
+        @media (max-width: 768px) {
+            .navbar .navbar-nav {
+                display: block;
+                float: none;
+                vertical-align: top;
+            }
+
+            .navbar .navbar-collapse {
+                text-align: center;
+            }
+        }
+
     </style>
 
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
 
+        <!-- Collapse button -->
         <div class="container">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
+            <!-- Links -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item  blog">
-                        <a class="nav-link home" href="{% url 'blog_index' %}">HOME</a>
+                        <a class="nav-link underline-effect" href="{% url 'blog_index' %}">BLOG</a>
+                    </li>
+                    <li class="nav-item  blog">
+                        <a class="nav-link underline-effect" href="{% url 'blog_index' %}">OTHER</a>
                     </li>
                 </ul>
 
                 <ul class="navbar-nav">
-                    <!-- Login Logout SignIn -->
+                    <!-- Registration / Login / Logout -->
                     {% if user.is_authenticated %}
-                    <!-- se un utente è loggato mostra logout-->
-                    <!-- Dropdown -->
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                            {{ user.username }}&#x25BC
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item" href="{% url 'password_change' %}">Cambia Password</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item logout" href="{% url 'logout' %}">Esci</a>
-                        </div>
-                        {% else %}
-                        <!-- altrimenti mostra opzione per registrarsi o loggare-->
+                    <!-- se un utente è loggato mostra logout e infromazioni utente-->
+                    <li class="nav-item user">
+                        <a class="nav-link underline-effect" href="{% url 'blog_index' %}">{{ user.username }}</a>
+                        <!-- mettere il link per gestione utente -->
+                    </li>
+                    <li class="nav-item logout">
+                        <a class="nav-link underline-effect" href="{% url 'logout' %}">ESCI</a>
+                    </li>
+                    {% else %}
+                    <!-- altrimenti mostra opzione per registrarsi o loggare-->
                     <li class="nav-item SignUp">
-                        <a class="nav-link singup " href="{% url 'signup' %}">Registrati</a>
+                        <a class="nav-link singup underline-effect " href="{% url 'signup' %}">REGISTRATI</a>
                     </li>
                     <li class="nav-item Login">
-                        <a class="nav-link login" href="{% url 'login' %}">Accedi</a>
+                        <a class="nav-link login underline-effect" href="{% url 'login' %}">ACCEDI</a>
                     </li>
                     {% endif %}
                 </ul>
             </div>
-        </div>
     </nav>
 
+    <!-- PAGE CONTENT -->
     <div class="page-content">
         {% block page_content %}{% endblock %}
     </div>

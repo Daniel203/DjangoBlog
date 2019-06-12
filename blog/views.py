@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 
 def blog_index(request):
     posts = Post.objects.all().order_by('-created_on')
-    paginator = Paginator(posts, 6)  # number posts for page 
+    paginator = Paginator(posts, 12)  # number posts for page 
     page = request.GET.get('page')
     posts = paginator.get_page(page)  # page where post is 
     context = {

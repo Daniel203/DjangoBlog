@@ -63,7 +63,6 @@ TEMPLATES = [
             'blogDjango/templates/',
             'blog/templates',
             'users/templates',
-            'projects/templates',
          ],
         'APP_DIRS': True,
         'OPTIONS': {

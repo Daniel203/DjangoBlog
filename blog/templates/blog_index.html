@@ -7,32 +7,48 @@
 {% endblock %}
 
 {% block page_content %}
-<div class="content">
-    <img class="image_orange" src="/media/images/orange_image.png" alt="" srcset="">
-    {% for post in posts %}
-    <div class="col-md-4">
-        <div class="card rounded">
-            <img class="card-img-top rounded" src="media/{{ post.image }}" alt="title_image">
-            <div class="card-body rounded">
-                <h2 class="card-title"><a class="a_titlePost "
-                        href="{% url 'blog_detail' post.slug %}"><b>{{ post.title }}</b></a>
-                </h2>
-                <small>
-                    {{ post.created_on.date }} |&nbsp;
-                    Categoria:&nbsp;
-                    {% for category in post.categories.all %}
-                    <a href="{% url 'blog_category' category.name %}">
-                        {{ category.name }}
-                    </a>&nbsp;
-                    {% endfor %}
-                </small>
-                <!-- <p class="p_anteprimaPost">{{ post.body | safe | slice:":400" }}...</p> -->
-            </div>
-        </div>
-        <br>
-    </div>
-    {% endfor %}
 
+<div class="content container-post ">
+
+    <!-- CARD DECK-->
+    <div class="row col-md-10">
+        {% for post in posts %}
+
+            <!-- CARD -->
+            <a href="{% url 'blog_detail' post.slug %}">
+            <div class="card rounded col-md-3 col-sm-5 shadow">
+
+                <!-- IMAGE at top -->
+                <img class="card-img-top rounded image-top-card" src="/media/{{ post.image }}" alt="title_image">
+
+                <!-- FOOTER -->
+                <div class="card-footer rounded">
+
+                    <!-- TITLE of post-->
+                    <h2 class="card-title"><a class="a_titlePost "
+                            href="{% url 'blog_detail' post.slug %}"><b>{{ post.title }}</b></a>
+                    </h2>
+
+                    <!-- INFO post -->
+                    <small>
+                        {{ post.created_on.date }} |&nbsp;     <!-- create on DATE-->
+                        Categoria:&nbsp;                               
+                        {% for category in post.categories.all %}        
+                        <a class="category-link" href="{% url 'blog_category' category.name %}">
+                            {{ category.name }}     <!-- CATEGORY  -->
+                        </a>&nbsp;
+                        {% endfor %}
+                    </small>
+                    
+                    <!-- <p class="p_anteprimaPost">{{ post.body | safe | slice:":400" }}...</p> -->
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+
+
+    <!-- pagination at bottom -->
     <div class="pagination d-flex justify-content-center">
         {% if posts.has_previous %}
         <a class="pagination-action" href="?page=1">
@@ -63,7 +79,4 @@
     </div>
 </div>
 
-
-
 {% endblock %}
-

@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block page_content %}
-<div class="col-md-8 offset-md-2">
+<div class="col-md-6 col-sm-10 col-xs-12 offset-md-3 offset-sm-1 container-post">
     <h2 class="post-title"><b>{{ post.title }}</b></h2>
     <small>
         {{ post.created_on.date }} |&nbsp;
@@ -23,7 +23,7 @@
     </div>
     <br><br><br><br>
 </div>
-<div class="comments col-md-8 offset-md-2">
+<div class="comments col-md-6 col-sm-10 col-xs-12 offset-md-3 offset-sm-1">
     <h3>Leave a comment:</h3>
     <form action="/{{ post.title }}/" method="post">
         {% csrf_token %}
