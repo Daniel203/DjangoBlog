@@ -20,7 +20,7 @@
                 <div class="card rounded col-md-3 col-sm-5 shadow">
     
                     <!-- IMAGE at top -->
-                    <img class="card-img-top rounded image-top-card" src="/media/{{ post.image }}" alt="title_image">
+                    <img class="card-img-top rounded-top image-top-card" src="/media/{{ post.image }}" alt="title_image">
     
                     <!-- FOOTER -->
                     <div class="card-footer rounded">
@@ -34,13 +34,9 @@
     
                         <!-- INFO post -->
                         <small>
-                            {{ post.created_on.date }} |&nbsp;     <!-- create on DATE-->
-                            Categoria:&nbsp;                               
-                            {% for category in post.categories.all %}        
-                            <a class="category-link" href="{% url 'blog_category' category.name %}">
-                                {{ category.name }}     <!-- CATEGORY  -->
-                            </a>&nbsp;
-                            {% endfor %}
+                            {{ post.created_on.date }} | &nbsp;   <!-- create on DATE-->
+                            Autore:
+                            {{ post.author }}
                         </small>
                     </div>
                 </div>

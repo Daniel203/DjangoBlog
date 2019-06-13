@@ -3,7 +3,7 @@ from blog.models import Post, Category, Comment
 
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug' : ('title',)}
-    list_display = ['title', 'created_on', 'last_modified', 'short_description']
+    list_display = ['title', 'author', 'created_on', 'last_modified', 'short_description']
 
 class CategoryAdmin(admin.ModelAdmin):
     pass

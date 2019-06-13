@@ -11,9 +11,14 @@
     margin: 0;
     padding: 0;
     background-color: grey;
+    min-height: 100vh;
 }
 .rounded {
-    border-radius: 10px!important;
+    border-radius: 10px !important;
+}
+.rounded-top {
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
 }
 .a_titlePost {
     color: black;

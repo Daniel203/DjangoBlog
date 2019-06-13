@@ -36,7 +36,7 @@ def blog_detail(request, slug):
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = Comment(
-                author = form.cleaned_data['author'],
+                author = request.user,
                 body = form.cleaned_data['body'],
                 post = post,
             )

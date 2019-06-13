@@ -7,6 +7,8 @@
 {% endblock %}
 
 {% block page_content %}
+
+<!-- POST -->
 <div class="col-md-6 col-sm-10 col-xs-12 offset-md-3 offset-sm-1 container-post">
     <h2 class="post-title"><b>{{ post.title }}</b></h2>
     <small>
@@ -15,37 +17,59 @@
         {% for category in post.categories.all %}
         <a href="{% url 'blog_category' category.name %}">
             {{ category.name }}
-        </a>&nbsp;
-        {% endfor %}
+        </a>
+        {% endfor %} | &nbsp;
+        Autore:
+        {{ post.author }}
     </small>
     <div class="blogdetail-body">
         <p>{{ post.body | safe | linebreaks }}</p>
     </div>
-    <br><br><br><br>
+    <br><br><br>
 </div>
+
+
+
+<!-- COMMENT-->
 <div class="comments col-md-6 col-sm-10 col-xs-12 offset-md-3 offset-sm-1">
-    <h3>Leave a comment:</h3>
-    <form action="/{{ post.title }}/" method="post">
-        {% csrf_token %}
-        <div class="form-group">
-            {{ form.author }}
-        </div>
-        <div class="form-group">
+
+    <!-- creation only if user is authenticated -->
+    {% if user.is_authenticated %}
+    <h3>Cosa ne pensi ?</h3>
+        <form method="POST">
+            {% csrf_token %}
             {{ form.body }}
-        </div>
-        <button type="submit" class="btn btn-warning">Submit</button>
-    </form>
-    <br><br>
+            <br>
+            <button type="submit" class="btn btn-warning">Submit</button>
+        </form>
+        <br><br>
+    {% endif %}
+
+    <!-- COMMENTS VIEW-->
     <h3>Comments:</h3>
-    {% for comment in comments %}
-    <p>
-        Il {{comment.created_on.date }}&nbsp;
-        <b>{{ comment.author }}</b> ha scritto:
-    </p>
-    <p>{{ comment.body }}</p>
-    <hr>
-    {% endfor %}
+    <!-- Se ci sono commenti li visualizza-->
+    {% if comments %}  
+        {% for comment in comments %}
+        <p>
+            Il {{comment.created_on.date }}&nbsp;
+            <b>{{ comment.author }}</b> ha scritto:
+        </p>
+        <p>{{ comment.body }}</p>
+        <hr>
+        {% endfor %}
+
+    <!-- atlrimenti visualizza un testo -->
+    {% else %}
+        <h6>Nessun commento da visualizzare</h6>
+        <h6>Puoi essere il primo a commentare!! </h6>
+
+        <!-- ricorda che per commentare bisogna fare il login-->
+        {% if user.is_authenticated == False %}
+            <br>
+            <h6>Fai il login per poter commentare</h6>
+        {% endif %}
+
+    {% endif %}
+                
 </div>
-
-
 {% endblock %}
