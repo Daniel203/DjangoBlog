@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_meta %}
+<title>User - {{ user.username }}</title>
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block page_content %}
+<div class="content">
+    <div class="col-md-8 offset-md-2 container-form">
+        <h1>PROFILE</h1>
+        <br><br>
+
+        <div class="user_info">
+            <p style="font-size: 20px; text-align: left; color:white;">
+                <b>Username</b> : {{ user.username }} <br><br>
+                <b>Nome</b> : {{ user.first_name}} <br><br>
+                <b>Cognome</b> : {{ user.last_name }} <br><br>
+                <b>Email</b> : {{ user.email }} <br><br>
+                <b>Password</b> :  <a href="{% url 'password_change' %}"><button class="btn btn-warning">Cambia Password</button></a>
+            </p>
+            
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+.content {
+    margin: 0;
+    padding: 0;
+    background-color: grey;
+    min-height: 100vh;
+}
+
+
+/* smartphones */
+@media (max-width: 768px) {
+    .container-form {
+        padding-top: 100px;
+        padding-bottom: 30px;
+    }
+}
+
+@media (min-width: 576px) {
+    .container-form {
+        padding-top: 100px;
+        padding-bottom: 20px;
+    }
+}
+
+.shadow {
+    -moz-box-shadow: rgba(0, 0, 0, 0.5) 3px 3px 5px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.5) 3px 3px 5px; 
+    box-shadow: rgba(0, 0, 0, 0.5) 3px 3px 5px;
+}
+
+.user_image {
+    width: 200px;
+    height: 200px;
+}

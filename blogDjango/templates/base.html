@@ -169,8 +169,7 @@
                     {% if user.is_authenticated %}
                     <!-- se un utente è loggato mostra logout e infromazioni utente-->
                     <li class="nav-item user">
-                        <a class="nav-link underline-effect" href="{% url 'blog_index' %}">{{ user.username }}</a>
-                        <!-- mettere il link per gestione utente -->
+                        <a class="nav-link underline-effect" href="{% url 'profile' %}">{{ user.username }}</a>
                     </li>
                     <li class="nav-item logout">
                         <a class="nav-link underline-effect" href="{% url 'logout' %}">ESCI</a>

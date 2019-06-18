@@ -22,12 +22,11 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
-    path('users/', include('users.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('markdownx', include('markdownx.urls'))
+    path('account/', include('users.urls')),
+    path('account/', include('django.contrib.auth.urls')),
 ]
 
  
- 
+# To upload images or files when creating a post in admin 
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

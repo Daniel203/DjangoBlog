@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'blog',
     'users',
-    'markdownx',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -129,11 +128,10 @@ USE_TZ = True
 
 STATIC_URL = '/blog/static/'
 
-STATIC_ROOT = '/blog/static'
+STATIC_ROOT = '/blog/static/'
 
 STATICFILES_DIRS = [
-    'blog/static/',
-    'users/static',
+    'users/static/',
 ]
 
 LOGIN_REDIRECT_URL = '/'

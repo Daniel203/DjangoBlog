@@ -19,15 +19,19 @@
             <div class="card rounded col-md-3 col-sm-5 shadow">
 
                 <!-- IMAGE at top -->
-                <img class="card-img-top rounded-top image-top-card" src="/media/{{ post.image }}" alt="title_image">
-
-                <!-- FOOTER -->
-                <div class="card-footer rounded">
-
+                <img class="card-img-top rounded-top image-top-card" src="{{ post.image.url }}" alt="title_image">
+                
+                <!-- BODY -->
+                <div class="card-body">
                     <!-- TITLE of post-->
                     <h2 class="card-title"><a class="a_titlePost "
                             href="{% url 'blog_detail' post.slug %}"><b>{{ post.title }}</b></a>
                     </h2>
+                </div>
+
+                <!-- FOOTER -->
+                <div class="card-footer rounded">
+
 
                     <!-- INFO post -->
                     <small>
@@ -75,7 +79,6 @@
                 <i class="fas fa-angle-double-right"></i>
             </a>
         {% endif %}
-
     </div>
 </div>
 
