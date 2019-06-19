@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     background-color: grey;
-    min-height: 100vh;
 }
 
 
@@ -12,12 +11,24 @@
         padding-top: 100px;
         padding-bottom: 30px;
     }
+    .content {
+        min-height: 80vh;
+    }
+    .footer-row {
+        height:20vh;
+    }
 }
 
-@media (min-width: 576px) {
+@media (min-width: 768px) {
     .container-form {
         padding-top: 100px;
         padding-bottom: 20px;
+    }
+    .content {
+        min-height: 85vh;
+    }
+    .footer-row {
+        height:15vh;
     }
 }
 
@@ -27,7 +38,6 @@
     box-shadow: rgba(0, 0, 0, 0.5) 3px 3px 5px;
 }
 
-.user_image {
-    width: 200px;
-    height: 200px;
+.rounded {
+    border-radius: 10px !important;
 }

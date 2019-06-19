@@ -35,12 +35,14 @@
             font-weight: bold;
         }
 
+        /* margine che stacca la side bar dal bordo dello schermo */
+        .ml-2, .mx-2 {
+            margin-left: 0 !important;
+        }
+
 
         /* Navbar */
         .navbar {
-            background-color: rgb(255, 205, 111);
-            padding-top: 1%;
-            padding-bottom: 1%;
             font-family: 'Open Sans', arial, sans-serif;
         }
 
@@ -48,47 +50,12 @@
         .navbar-brand {
             font-size: 16px;
             text-decoration: none;
-            color: black;
             letter-spacing: 2px;
             position: relative;
         }
 
-
-        /* Navbar on mobile phones */
-        @media (max-width: 768px) {
-            .navbar-nav>li>a {
-                padding-top: 10%;
-                padding-bottom: 10%;
-            }
-
-            .navbar-light .navbar-nav .nav-link,
-            .navbar-brand {
-                font-size: 20px;
-            }
-        }
-
-        .navbar-light .navbar-toggler{
+        .navbar-light .navbar-toggler {
             border: none;
-        }
-
-
-        /* Underline effect in navbar */
-        .underline-effect:after {
-            background: none repeat scroll 0 0 transparent;
-            bottom: 0;
-            content: "";
-            display: block;
-            height: 3px;
-            left: 50%;
-            position: absolute;
-            background: black;
-            transition: width 0.3s ease 0s, left 0.3s ease 0s;
-            width: 0;
-        }
-
-        .underline-effect:hover:after {
-            width: 100%;
-            left: 0;
         }
 
 
@@ -129,69 +96,179 @@
             margin: 0;
         }
 
-        @media (max-width: 768px) {
-            .navbar .navbar-nav {
-                display: block;
-                float: none;
-                vertical-align: top;
+        /* Navbar  < 992px is collapsed, >= 992px is extended */
+
+        /* Navbar on small devices */
+        @media (max-width: 992px) {
+            .navbar-nav .nav-link {
+                padding-top: 10vh;
+                padding-right: 20vw;
+                padding-left: 10vw;
+            }
+            .mobileMenu {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                margin: auto;
+                transform: translateX(-100%);
+                transition: all ease 0.25s;
             }
 
-            .navbar .navbar-collapse {
-                text-align: center;
+            .open {
+                transform: translateX(0);
+            }
+
+            .bg-dark {
+                background-color: rgb(255, 205, 111) !important;
+            }
+
+            .nav-element {
+                color: black !important;
             }
         }
 
+        /* Navbar on large devices */
+        @media (min-width: 992px) {
+
+            .navbar-expand-lg .navbar-nav .nav-link {
+                padding-right: 1rem; 
+                padding-left: 1rem; 
+            }
+
+            /* Change color on scroll (background and font) */
+            .bg-dark {
+                transition: 750ms ease;
+                background-color: transparent !important;
+            }
+
+            .bg-dark.scrolled {
+                background-color: rgb(255, 205, 111) !important;
+            }
+
+            .nav-element.white {
+                color: white !important;
+            }
+
+            .nav-element.black {
+                color: black !important;
+            }
+
+
+            /* Underline effect in navbar */
+            .black:after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 3px;
+                bottom: 0;
+                left: 0;
+                background-color: black;
+                visibility: hidden;
+                -webkit-transform: scaleX(0);
+                transform: scaleX(0);
+                -webkit-transition: all 0.2s ease-in-out 0s;
+                transition: all 0.2s ease-in-out 0s;
+            }
+
+            .white:hover:after,
+            .black:hover:after {
+                visibility: visible;
+                -webkit-transform: scaleX(.9);
+                transform: scaleX(.9);
+            }
+
+            .white:after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 3px;
+                bottom: 0;
+                left: 0;
+                background-color: white;
+                visibility: hidden;
+                -webkit-transform: scaleX(0);
+                transform: scaleX(0);
+                -webkit-transition: all 0.2s ease-in-out 0s;
+                transition: all 0.2s ease-in-out 0s;
+            }
+        }
     </style>
 
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-
-        <!-- Collapse button -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark justify-content-sm-start fixed-top" id="navbar-Top">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+
+            <!-- Navbar Brand-->
+            <a class="navbar-brand nav-element order-1 order-lg-0 mr-auto" href="#">PostoUnPosto</a>
+            <!-- Collapse button -->
+            <button class="navbar-toggler align-self-start"
+                        type="button" >
+                        <span class="navbar-toggler-icon"></span>
             </button>
 
             <!-- Links -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
+            <div class="collapse navbar-collapse d-flex flex-columm flex-lg-row flex-xl-row justify-content-lg-end bg-dark p-3 p-lg-1 ml-lg-0 ml-2 mt-5 mt-lg-0 mobileMenu" id="navbarSupportedContent">
+                <ul class="navbar-nav align-self-stretch">
                     <li class="nav-item  blog">
-                        <a class="nav-link underline-effect" href="{% url 'blog_index' %}">BLOG</a>
+                        <a class="nav-link nav-element" href="{% url 'blog_index' %}">BLOG</a>
                     </li>
                     <li class="nav-item  blog">
-                        <a class="nav-link underline-effect" href="{% url 'blog_index' %}">OTHER</a>
+                        <a class="nav-link nav-element" href="{% url 'blog_index' %}">OTHER</a>
                     </li>
-                </ul>
 
-                <ul class="navbar-nav">
                     <!-- Registration / Login / Logout -->
                     {% if user.is_authenticated %}
                     <!-- se un utente è loggato mostra logout e infromazioni utente-->
                     <li class="nav-item user">
-                        <a class="nav-link underline-effect" href="{% url 'profile' %}">{{ user.username }}</a>
+                        <a class="nav-link nav-element" href="{% url 'profile' %}">{{ user.username }}</a>
                     </li>
                     <li class="nav-item logout">
-                        <a class="nav-link underline-effect" href="{% url 'logout' %}">ESCI</a>
+                        <a class="nav-link nav-element" href="{% url 'logout' %}">ESCI</a>
                     </li>
                     {% else %}
                     <!-- altrimenti mostra opzione per registrarsi o loggare-->
                     <li class="nav-item SignUp">
-                        <a class="nav-link singup underline-effect " href="{% url 'signup' %}">REGISTRATI</a>
+                        <a class="nav-link nav-element singup " href="{% url 'signup' %}">REGISTRATI</a>
                     </li>
                     <li class="nav-item Login">
-                        <a class="nav-link login underline-effect" href="{% url 'login' %}">ACCEDI</a>
+                        <a class="nav-link nav-element login" href="{% url 'login' %}">ACCEDI</a>
                     </li>
                     {% endif %}
                 </ul>
             </div>
+        </div>
     </nav>
+
 
     <!-- PAGE CONTENT -->
     <div class="page-content">
         {% block page_content %}{% endblock %}
     </div>
 
+    <!-- FOOOTER -->
+    <div class="row footer-row" style="background-color:rgb(255, 205, 111); padding-top:40px; padding-bottom:20px; margin:0;">
+        <div class="col-md-4">
+            <p style="text-align:center; font-size: 16px;">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-facebook-square"></i>
+                <i class="fab fa-facebook-messenger"></i>
+            </p>
+        </div>
+        <div class="col-md-4" style="text-align: center;">
+            <p>Copyright @ 2019 Bootstrap 4</p>
+        </div>
+        <div class="col-md-4">
+            <p style="text-align:center; font-size: 16px;">
+                <i class="fab fa-youtube"></i>
+                <i class="fab fa-snapchat"></i>
+                <i class="fab fa-twitter"></i>
+            </p>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap scripts -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
     </script>
@@ -202,6 +279,53 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
     </script>
     <script src="https://kit.fontawesome.com/6cce1b4403.js"></script>
+
+
+    <!-- CHANGE COLOR ON SCROLL (navbar) -->
+    <script>
+        $(window).scroll(function () {
+            $('nav').toggleClass('scrolled', $(this).scrollTop() > 0);
+        });
+    </script>
+
+    <!-- CHANGE COLOR ON SCROLL (font) -->
+    <script>
+        // set color when the page load, before the scroll
+        if ($('.content').css('background-color') === 'rgb(128, 128, 128)') {
+            $('.nav-element').addClass('white');
+        } else {
+            $('.nav-element').addClass('black');
+        }
+
+        // change color when user scrolls
+        $(window).scroll(function () {
+            // at scroll change color
+            if ($(this).scrollTop() > 0) {
+                if ($('.content').css('background-color') === 'rgb(128, 128, 128)') {
+                    $('.nav-element').removeClass('white');
+                    $('.nav-element').addClass('black');
+                }
+            }
+            // reset color when the user come back at the top of the page
+            if ($(this).scrollTop() == 0) {
+                if ($('.content').css('background-color') === 'rgb(128, 128, 128)') {
+                    $('.nav-element').removeClass('black');
+                    $('.nav-element').addClass('white');
+                } else {
+                    $('.nav-element').addClass('black');
+                }
+            }
+        });
+    </script>
+
+    <!-- SIDEBAR -->
+    <script>
+        $(document).ready(function() {
+            $('.navbar-toggler').on('click', function() {
+                $('.mobileMenu').toggleClass('open');
+            });
+        });
+    </script>
 
 </body>
 
