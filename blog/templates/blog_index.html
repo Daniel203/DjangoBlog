@@ -7,78 +7,81 @@
 {% endblock %}
 
 {% block page_content %}
-
 <div class="content container-post ">
+    <div class="container">
 
-    <!-- CARD DECK-->
-    <div class="row col-md-10">
-        {% for post in posts %}
+        <!-- CARD DECK-->
+        <div class="row col-md-12 d-felx justify-content-center ">
+            {% for post in posts %}
 
             <!-- CARD -->
             <a href="{% url 'blog_detail' post.slug %}">
-            <div class="card rounded col-md-3 col-sm-5 shadow">
+                <div class="card rounded col-md-3 col-sm-5 shadow">
 
-                <!-- IMAGE at top -->
-                <img class="card-img-top rounded-top image-top-card" src="{{ post.image.url }}" alt="title_image">
-                
-                <!-- BODY -->
-                <div class="card-body">
-                    <!-- TITLE of post-->
-                    <h2 class="card-title"><a class="a_titlePost "
-                            href="{% url 'blog_detail' post.slug %}"><b>{{ post.title }}</b></a>
-                    </h2>
+                    <!-- IMAGE at top -->
+                    <img class="card-img-top rounded-top image-top-card" src="{{ post.image.url }}" alt="title_image">
+
+                    <!-- BODY -->
+                    <div class="card-body">
+                        <!-- TITLE of post-->
+                        <h2 class="card-title"><a class="a_titlePost "
+                                href="{% url 'blog_detail' post.slug %}"><b>{{ post.title }}</b></a>
+                        </h2>
+                    </div>
+
+                    <!-- FOOTER -->
+                    <div class="card-footer rounded">
+
+
+                        <!-- INFO post -->
+                        <small>
+                            {{ post.created_on.date }} |&nbsp;
+                            <!-- create on DATE-->
+                            Categoria:&nbsp;
+                            {% for category in post.categories.all %}
+                            <a class="category-link" href="{% url 'blog_category' category.name %}">
+                                {{ category.name }}
+                                <!-- CATEGORY  -->
+                            </a>
+                            {% endfor %}
+                        </small>
+
+                        <!-- <p class="p_anteprimaPost">{{ post.body | safe | slice:":400" }}...</p> -->
+                    </div>
                 </div>
-
-                <!-- FOOTER -->
-                <div class="card-footer rounded">
-
-
-                    <!-- INFO post -->
-                    <small>
-                        {{ post.created_on.date }} |&nbsp;     <!-- create on DATE-->
-                        Categoria:&nbsp;                               
-                        {% for category in post.categories.all %}        
-                        <a class="category-link" href="{% url 'blog_category' category.name %}">
-                            {{ category.name }}     <!-- CATEGORY  -->
-                        </a>
-                        {% endfor %}
-                    </small>
-                    
-                    <!-- <p class="p_anteprimaPost">{{ post.body | safe | slice:":400" }}...</p> -->
-                </div>
-            </div>
-        </a>
-        {% endfor %}
-    </div>
+            </a>
+            {% endfor %}
+        </div>
 
 
-    <!-- pagination at bottom -->
-    <div class="pagination d-flex justify-content-center">
-        {% if posts.has_previous %}
+        <!-- pagination at bottom -->
+        <div class="pagination d-flex justify-content-center">
+            {% if posts.has_previous %}
             <a class="pagination-action" href="?page=1">
                 <i class="fas fa-angle-double-left"></i>
             </a>
             <a class="pagination-action" href="?page={{ posts.previous_page_number }}">
                 <i class="fas fa-angle-left"></i>
             </a>
-        {% endif %}
-
-        {% for num in posts.paginator.page_range %}
-            {% if posts.number == num %}
-                <span class="pagination-number pagination-current">{{ num }}</span>
-            {% elif num > posts.number|add:'-3' and num < posts.number|add:'3' %}
-                <a class="pagination-number" href="?page={{ num }}">{{ num }}</a>
             {% endif %}
-        {% endfor %}
 
-        {% if posts.has_next %}
+            {% for num in posts.paginator.page_range %}
+            {% if posts.number == num %}
+            <span class="pagination-number pagination-current">{{ num }}</span>
+            {% elif num > posts.number|add:'-3' and num < posts.number|add:'3' %}
+            <a class="pagination-number" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+            {% endfor %}
+
+            {% if posts.has_next %}
             <a class="pagination-action" href="?page={{ posts.next_page_number }}">
                 <i class="fas fa-angle-right"></i>
             </a>
             <a class="pagination-action" href="?page={{ posts.paginator.num_pages }}">
                 <i class="fas fa-angle-double-right"></i>
             </a>
-        {% endif %}
+            {% endif %}
+        </div>
     </div>
 </div>
 

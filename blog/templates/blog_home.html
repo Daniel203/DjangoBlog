@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_meta %}
+<title>My Django - blog</title>
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+{% endblock %}
+
+{% block page_content %}
+<div class="container-post">
+
+    <!-- 3 IMAGES -->
+    <div class="row col-md-12 d-felx justify-content-center ">
+        {% for post in last_3_posts %}
+        <a href="{% url 'blog_detail' post.slug %}">
+            <img class="images-home" src="{{ post.image.url }}" alt="title_image">
+        </a>
+        {% endfor %}
+      </div>
+
+    </div>
+</div>
+
+{% endblock %}

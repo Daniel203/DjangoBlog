@@ -8,68 +8,146 @@
 
 {% block page_content %}
 
+<style>
+    /* Immagini inserite dai blogger in django admin */
+    img {
+        max-width: 100%;
+    }
+</style>
+
 <!-- POST -->
-<div class="col-md-6 col-sm-10 col-xs-12 offset-md-3 offset-sm-1 container-post">
-    <h2 class="post-title"><b>{{ post.title }}</b></h2>
-    <small>
-        {{ post.created_on.date }} |&nbsp;
-        Categoria:&nbsp;
-        {% for category in post.categories.all %}
-        <a href="{% url 'blog_category' category.name %}">
-            {{ category.name }}
-        </a>
-        {% endfor %} | &nbsp;
-        Autore:
-        {{ post.author }}
-    </small>
-    <div class="blogdetail-body">
-        <p>{{ post.body | safe | linebreaks }}</p>
-    </div>
-    <br><br><br>
-</div>
+<div class="col-lg-7 col-md-8 col-sm-10 col-xs-10">
+    <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 offset-lg-1 offset-md-1 container-post">
+        <div id="title-div">
+            <h2 class="post-title"><b>{{ post.title }}</b></h2>
+        </div>
+        <br>
 
+        <small>
+            {{ post.created_on.date }} |&nbsp;
+            Categoria:&nbsp;
+            {% for category in post.categories.all %}
+            <a href="{% url 'blog_category' category.name %}">
+                {{ category.name }}
+            </a>
+            {% endfor %} | &nbsp;
+            Autore:
+            {{ post.author }}
+        </small>
+        <br>
 
-<!-- COMMENT-->
-<div class="comments col-md-6 col-sm-10 col-xs-12 offset-md-3 offset-sm-1">
+        <div class="blogdetail-body">
+            <p>{{ post.body | safe | linebreaks }}</p>
+            <br><br><br>
 
-    <!-- creation only if user is authenticated -->
-    {% if user.is_authenticated %}
-    <h3>Cosa ne pensi ?</h3>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.body }}
+            <!-- COMMENTS -->
+            <!-- creation only if user is authenticated -->
+            {% if user.is_authenticated %}
+            <h3>Cosa ne pensi ?</h3>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.body }}
+                <br>
+                <button type="submit" class="btn btn-warning">Submit</button>
+            </form>
+            <br><br>
+            {% endif %}
+        </div>
+
+        <div class="blogdetail-comments">
+            <!-- COMMENTS VIEW-->
+            <div id="comment-div">
+                <h2>Comments</h2>
+            </div>
             <br>
-            <button type="submit" class="btn btn-warning">Submit</button>
-        </form>
-        <br><br>
-    {% endif %}
+            <!-- Se ci sono commenti li visualizza-->
+            {% if comments %}
+            {% for comment in comments %}
+            <p>
+                Il {{comment.created_on.date }}&nbsp;
+                <b>{{ comment.author }}</b> ha scritto:
+            </p>
+            <p>{{ comment.body }}</p>
+            <hr>
+            {% endfor %}
 
-    <!-- COMMENTS VIEW-->
-    <h3>Comments:</h3>
-    <!-- Se ci sono commenti li visualizza-->
-    {% if comments %}  
-        {% for comment in comments %}
-        <p>
-            Il {{comment.created_on.date }}&nbsp;
-            <b>{{ comment.author }}</b> ha scritto:
-        </p>
-        <p>{{ comment.body }}</p>
-        <hr>
-        {% endfor %}
+            <!-- atlrimenti visualizza un testo -->
+            {% else %}
+            <h6>Nessun commento da visualizzare</h6>
+            <h6>Puoi essere il primo a commentare!! </h6>
 
-    <!-- atlrimenti visualizza un testo -->
-    {% else %}
-        <h6>Nessun commento da visualizzare</h6>
-        <h6>Puoi essere il primo a commentare!! </h6>
-
-        <!-- ricorda che per commentare bisogna fare il login-->
-        {% if user.is_authenticated == False %}
+            <!-- ricorda che per commentare bisogna fare il login-->
+            {% if user.is_authenticated == False %}
             <br>
             <h6>Fai il login per poter commentare</h6>
-        {% endif %}
+            {% endif %}
 
-    {% endif %}
-                
+            {% endif %}
+
+        </div>
+    </div>
 </div>
-<br><br><br>
+
+<div class="col-lg-5 col-md-4 col-sm-10 col-xs-10">
+    <div class="col-lg-8 col-md-10 col-sm-12 col-xs-12 offset-lg-2 offset-md-1 d-felx justify-content-center">
+            {% for post in similar_posts %}
+
+            <!-- CARD -->
+            <a href="{% url 'blog_detail' post.slug %}">
+                <div class="card rounded col-md-3 col-sm-5 shadow">
+
+                    <!-- IMAGE at top -->
+                    <img class="card-img-top rounded-top image-top-card" src="{{ post.image.url }}" alt="title_image">
+
+                    <!-- BODY -->
+                    <div class="card-body">
+                        <!-- TITLE of post-->
+                        <h2 class="card-title"><a class="a_titlePost "
+                                href="{% url 'blog_detail' post.slug %}"><b>{{ post.title }}</b></a>
+                        </h2>
+                    </div>
+
+                    <!-- FOOTER -->
+                    <div class="card-footer rounded">
+
+
+                        <!-- INFO post -->
+                        <small>
+                            {{ post.created_on.date }} |&nbsp;
+                            <!-- create on DATE-->
+                            Categoria:&nbsp;
+                            {% for category in post.categories.all %}
+                            <a class="category-link" href="{% url 'blog_category' category.name %}">
+                                {{ category.name }}
+                                <!-- CATEGORY  -->
+                            </a>
+                            {% endfor %}
+                        </small>
+
+                        <!-- <p class="p_anteprimaPost">{{ post.body | safe | slice:":400" }}...</p> -->
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    // When the user scrolls the page, execute myFunction 
+    window.onscroll = function () {
+        myFunction()
+    };
+
+    function myFunction() {
+        var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        var scrolled = (winScroll / height) * 100;
+        if (scrolled > 99.5) {
+            scrolled = 100;
+        }
+        document.getElementById("myBar").style.width = scrolled + "%";
+    }
+</script>
+
 {% endblock %}

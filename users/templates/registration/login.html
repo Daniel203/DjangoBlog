@@ -20,6 +20,10 @@
                     {{ form | crispy }}
                     <button class="btn btn-warning" type="submit">Accedi</button>
                     <a href="{% url 'password_reset' %}">Password dimenticata?</a>
+                    <br><br>
+                    <p>Non hai un account,
+                        <a href="{% url 'signup' %}">REGISTRATI</a>.
+                    </p>
                 </form>
             </div>
         </div>

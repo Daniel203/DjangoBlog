@@ -22,8 +22,7 @@
 <body>
 
     <style>
-        body,
-        html {
+        body,  html {
             height: 100%;
             font-family: 'Karla', sans-serif;
         }
@@ -48,9 +47,10 @@
 
         .navbar-light .navbar-nav .nav-link,
         .navbar-brand {
-            font-size: 16px;
+            font-size: 14px;
             text-decoration: none;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            font-weight: 500;
             position: relative;
         }
 
@@ -76,16 +76,6 @@
         }
 
 
-        /* Dropdown */
-        .dropdown-menu {
-            background-color: rgb(227, 238, 243);
-        }
-
-        .dropdown-toggle {
-            border: none;
-        }
-
-
         /* Register / Login  forms */
         form .alert ul li {
             list-style: none;
@@ -95,6 +85,7 @@
             padding: 0;
             margin: 0;
         }
+
 
         /* Navbar  < 992px is collapsed, >= 992px is extended */
 
@@ -125,7 +116,7 @@
 
             .nav-element {
                 color: black !important;
-            }
+            } 
         }
 
         /* Navbar on large devices */
@@ -138,7 +129,7 @@
 
             /* Change color on scroll (background and font) */
             .bg-dark {
-                transition: 750ms ease;
+                transition: .5s ease;
                 background-color: transparent !important;
             }
 
@@ -160,7 +151,7 @@
                 content: "";
                 position: absolute;
                 width: 100%;
-                height: 3px;
+                height: 2px;
                 bottom: 0;
                 left: 0;
                 background-color: black;
@@ -182,7 +173,7 @@
                 content: "";
                 position: absolute;
                 width: 100%;
-                height: 3px;
+                height: 2px;
                 bottom: 0;
                 left: 0;
                 background-color: white;
@@ -193,18 +184,35 @@
                 transition: all 0.2s ease-in-out 0s;
             }
         }
+
+        /* PROGRESS BAR */
+        .progress {
+            position: fixed;
+            top: 98vh; /* Adjust to desired height */
+            width: 100%;
+            background: transparent;
+            border-radius: 0;
+            z-index: 2;
+        }
+        
+        .progress-bar {
+            transition: width .1s !important;
+            background-color: rgb(255, 205, 111) !important;
+        }
+
     </style>
+
 
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-light bg-dark justify-content-sm-start fixed-top" id="navbar-Top">
         <div class="container">
+            
 
             <!-- Navbar Brand-->
-            <a class="navbar-brand nav-element order-1 order-lg-0 mr-auto" href="#">PostoUnPosto</a>
+            <a class="navbar-brand nav-element order-1 order-lg-0 mr-auto" href="{% url 'blog_home' %}">PostoUnPosto</a>
             <!-- Collapse button -->
-            <button class="navbar-toggler align-self-start"
-                        type="button" >
-                        <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler align-self-start" type="button">
+                    <span class="navbar-toggler-icon"></span>
             </button>
 
             <!-- Links -->
@@ -214,7 +222,10 @@
                         <a class="nav-link nav-element" href="{% url 'blog_index' %}">BLOG</a>
                     </li>
                     <li class="nav-item  blog">
-                        <a class="nav-link nav-element" href="{% url 'blog_index' %}">OTHER</a>
+                        <a class="nav-link nav-element" href="{% url 'blog_index' %}">ABOUT</a>
+                    </li>
+                    <li class="nav-item  blog">
+                        <a class="nav-link nav-element" href="{% url 'blog_index' %}">CONTATTACI</a>
                     </li>
 
                     <!-- Registration / Login / Logout -->
@@ -228,9 +239,6 @@
                     </li>
                     {% else %}
                     <!-- altrimenti mostra opzione per registrarsi o loggare-->
-                    <li class="nav-item SignUp">
-                        <a class="nav-link nav-element singup " href="{% url 'signup' %}">REGISTRATI</a>
-                    </li>
                     <li class="nav-item Login">
                         <a class="nav-link nav-element login" href="{% url 'login' %}">ACCEDI</a>
                     </li>
@@ -240,6 +248,15 @@
         </div>
     </nav>
 
+    <!-- PROGRESS BAR -->
+    {% if blog_detail %}
+    <div class="progress">
+            <div id="myBar" class="progress-bar bg-warning " role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    {% endif %}
+    
+    
+    
 
     <!-- PAGE CONTENT -->
     <div class="page-content">
@@ -284,7 +301,7 @@
     <!-- CHANGE COLOR ON SCROLL (navbar) -->
     <script>
         $(window).scroll(function () {
-            $('nav').toggleClass('scrolled', $(this).scrollTop() > 0);
+            $('nav').toggleClass('scrolled', $(this).scrollTop() > 10);
         });
     </script>
 
@@ -300,14 +317,14 @@
         // change color when user scrolls
         $(window).scroll(function () {
             // at scroll change color
-            if ($(this).scrollTop() > 0) {
+            if ($(this).scrollTop() > 10) {
                 if ($('.content').css('background-color') === 'rgb(128, 128, 128)') {
                     $('.nav-element').removeClass('white');
                     $('.nav-element').addClass('black');
                 }
             }
             // reset color when the user come back at the top of the page
-            if ($(this).scrollTop() == 0) {
+            if ($(this).scrollTop() < 10) {
                 if ($('.content').css('background-color') === 'rgb(128, 128, 128)') {
                     $('.nav-element').removeClass('black');
                     $('.nav-element').addClass('white');

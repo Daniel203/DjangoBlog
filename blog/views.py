@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from blog.models import Post, Comment
+from blog.models import Post, Comment, Category
 from blog.forms import CommentForm
 from django.http import HttpResponseRedirect
 from django.core.paginator import Paginator
@@ -16,6 +16,14 @@ def blog_index(request):
     return render(request, 'blog_index.html', context)
 
 
+def blog_home(request):
+    last_3_posts = Post.objects.all().order_by('-created_on')[0:3]
+    context = {
+        'last_3_posts' : last_3_posts, 
+    }
+    return render(request, 'blog_home.html', context)
+
+
 def blog_category(request, category):
     posts = Post.objects.filter(categories__name__contains = category).order_by('-created_on')
     context = {
@@ -28,6 +36,7 @@ def blog_category(request, category):
 
 def blog_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)  # if post doesn't exist return error404
+
     comments = Comment.objects.filter(post=post)
 
     # comment form
@@ -48,6 +57,7 @@ def blog_detail(request, slug):
         'comments' : comments,
         'form' : form,
         'blog' : 'active',
+        'blog_detail': True,
     }
     return render(request, 'blog_detail.html', context)
 
